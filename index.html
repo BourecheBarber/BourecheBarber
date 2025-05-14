@@ -369,6 +369,94 @@
             aspect-ratio: 1;
         }
 
+        /* Remove the scanning line that goes through the middle */
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-color);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Animated border lines */
+        .gallery-item .border-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .gallery-item .border-lines::before,
+        .gallery-item .border-lines::after,
+        .gallery-item .border-lines span::before,
+        .gallery-item .border-lines span::after {
+            content: '';
+            position: absolute;
+            background: var(--accent-color);
+        }
+
+        /* Top line */
+        .gallery-item .border-lines::before {
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            animation: expandWidth 2s ease-in-out infinite;
+        }
+
+        /* Right line */
+        .gallery-item .border-lines::after {
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 0;
+            animation: expandHeight 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        /* Bottom line */
+        .gallery-item .border-lines span::before {
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            animation: expandWidth 2s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        /* Left line */
+        .gallery-item .border-lines span::after {
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            animation: expandHeight 2s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes expandWidth {
+            0%, 100% { width: 0; }
+            50% { width: 100%; }
+        }
+
+        @keyframes expandHeight {
+            0%, 100% { height: 0; }
+            50% { height: 100%; }
+        }
+
+        .gallery-item:hover::before {
+            transform: scale(0.95);
+        }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -471,9 +559,13 @@
 
         .contact-info {
             margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .email-link {
+        .contact-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -484,16 +576,67 @@
             padding: 0.5rem 1rem;
             border: 2px solid transparent;
             border-radius: 25px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .email-link:hover {
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,0,0,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
             color: var(--accent-color);
             border-color: var(--accent-color);
             transform: translateY(-2px);
         }
 
-        .email-icon {
+        .contact-icon {
             font-size: 1.3rem;
+        }
+
+        /* Gallery Line Animations */
+        .gallery-section {
+            padding: 2rem 0;
+            background: var(--primary-dark);
+            position: relative;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: expandLine 3s ease-in-out infinite;
+        }
+
+        .gallery-section::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: expandLine 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes expandLine {
+            0%, 100% { width: 0; left: 50%; right: 50%; }
+            50% { width: 90%; left: 5%; right: 5%; }
         }
 
         /* Mobile Menu */
@@ -530,6 +673,57 @@
             color: var(--accent-color);
         }
 
+        /* Corner line animations for gallery items */
+        .gallery-item .corner-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .gallery-item .corner-lines::before,
+        .gallery-item .corner-lines::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item .corner-lines::before {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .gallery-item .corner-lines::after {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .gallery-item:hover .corner-lines::before,
+        .gallery-item:hover .corner-lines::after {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .corner-lines::before {
+            top: 5px;
+            left: 5px;
+        }
+
+        .gallery-item:hover .corner-lines::after {
+            bottom: 5px;
+            right: 5px;
+        }
+
         @media (max-width: 768px) {
             .menu-item {
                 flex-direction: column;
@@ -539,6 +733,10 @@
             
             .menu-item-price {
                 align-self: flex-end;
+            }
+            
+            .contact-info {
+                gap: 0.8rem;
             }
         }
     </style>
@@ -584,12 +782,16 @@
         <div class="gallery-grid">
             <div class="gallery-item">
                 <img src="interior-view-1.jpg" alt="Boureche Barber Shop Interior">
+                <div class="border-lines"><span></span></div>
+                <div class="corner-lines"></div>
                 <div class="gallery-overlay">
                     <span>Our Vibe</span>
                 </div>
             </div>
             <div class="gallery-item">
                 <img src="interior-view-2.jpg" alt="Barber Station Setup">
+                <div class="border-lines"><span></span></div>
+                <div class="corner-lines"></div>
                 <div class="gallery-overlay">
                     <span>The Space</span>
                 </div>
@@ -599,6 +801,8 @@
                     <source src="interior.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="border-lines"><span></span></div>
+                <div class="corner-lines"></div>
                 <div class="gallery-overlay">
                     <span>Experience</span>
                 </div>
@@ -702,8 +906,12 @@
             <a href="#" class="social-link">📍</a>
         </div>
         <div class="contact-info">
-            <a href="mailto:BourecheBarber@proton.me" class="email-link">
-                <span class="email-icon">✉️</span>
+            <a href="tel:0725224459" class="contact-link">
+                <span class="contact-icon">📱</span>
+                072 522 4459
+            </a>
+            <a href="mailto:BourecheBarber@proton.me" class="contact-link email-link">
+                <span class="contact-icon">✉️</span>
                 BourecheBarber@proton.me
             </a>
         </div>
@@ -772,3 +980,4 @@
     </script>
 </body>
 </html>
+
