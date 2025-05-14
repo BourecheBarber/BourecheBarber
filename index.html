@@ -257,10 +257,16 @@
 
         .menu-item {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 0.8rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            padding-left: 1rem;
+            color: var(--accent-color);
         }
 
         .menu-item:last-child {
@@ -270,12 +276,6 @@
         .menu-item-name {
             font-weight: 500;
             font-size: 1.1rem;
-        }
-
-        .menu-item-price {
-            font-weight: 700;
-            color: var(--accent-color);
-            font-size: 1.2rem;
         }
 
         .menu-note {
@@ -300,7 +300,7 @@
 
         .style-item {
             background: var(--primary-dark);
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             border-radius: 10px;
             transition: all 0.3s ease;
@@ -333,14 +333,7 @@
 
         .style-name {
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .style-price {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--accent-color);
+            font-size: 1.2rem;
         }
 
         /* Footer */
@@ -818,15 +811,12 @@
             <h3 class="category-title">Basic Services</h3>
             <div class="menu-item">
                 <span class="menu-item-name">Gents Hair Cut</span>
-                <span class="menu-item-price">R150</span>
             </div>
             <div class="menu-item">
                 <span class="menu-item-name">Childrens Hair Cut</span>
-                <span class="menu-item-price">R130</span>
             </div>
             <div class="menu-item">
                 <span class="menu-item-name">Pensioners Cut</span>
-                <span class="menu-item-price">R120</span>
             </div>
         </div>
 
@@ -834,11 +824,9 @@
             <h3 class="category-title">Premium Services</h3>
             <div class="menu-item">
                 <span class="menu-item-name">Hair Cut and Shave<span class="menu-note">(blade)</span></span>
-                <span class="menu-item-price">R280</span>
             </div>
             <div class="menu-item">
                 <span class="menu-item-name">Hair Cut and Shave<span class="menu-note">(clipper)</span></span>
-                <span class="menu-item-price">R260</span>
             </div>
         </div>
 
@@ -846,11 +834,9 @@
             <h3 class="category-title">Beard Services</h3>
             <div class="menu-item">
                 <span class="menu-item-name">Beard Trim<span class="menu-note">(blade)</span></span>
-                <span class="menu-item-price">R150</span>
             </div>
             <div class="menu-item">
                 <span class="menu-item-name">Beard Trim<span class="menu-note">(clipper)</span></span>
-                <span class="menu-item-price">R120</span>
             </div>
         </div>
     </section>
@@ -861,27 +847,21 @@
         <div class="style-grid">
             <div class="style-item">
                 <div class="style-name">Fade</div>
-                <div class="style-price">R170</div>
             </div>
             <div class="style-item">
                 <div class="style-name">Table Top</div>
-                <div class="style-price">R170</div>
             </div>
             <div class="style-item">
                 <div class="style-name">Comb Over</div>
-                <div class="style-price">R170</div>
             </div>
             <div class="style-item">
                 <div class="style-name">Mullet</div>
-                <div class="style-price">R170</div>
             </div>
             <div class="style-item">
                 <div class="style-name">Mawhawk</div>
-                <div class="style-price">R170</div>
             </div>
             <div class="style-item">
-                <div class="style-name">Bazz Cut</div>
-                <div class="style-price">R170</div>
+                <div class="style-name">Buzz Cut</div>
             </div>
         </div>
     </section>
@@ -980,4 +960,3 @@
     </script>
 </body>
 </html>
-
